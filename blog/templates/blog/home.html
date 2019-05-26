@@ -1,0 +1,27 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+    {% if user.is_active %}
+    <p>{{user.username }}님 반갑습니다.</p>
+    <P><a href="{% url 'logout' %}">logout</a></P>
+    {% else %}
+    <p>you are not logged in</p>
+    <a href="{% url 'login' %}">login</a>
+    <a href="{% url 'accounts:signup' %}">signup</a>
+    
+    {% endif %}
+
+
+    <h1>홈 페이지</h1>
+
+    {% for idea in ideas.all %}
+    <div>
+        
+        <h2><a href = "{% url 'detail' idea.id %}">{{idea.title}}</a></h2>
+        <P>{{idea.title}}</P>
+        <p>{{idea.created_date}}</p>
+        
+    </div>
+    {% endfor %}
+
+{% endblock %}
